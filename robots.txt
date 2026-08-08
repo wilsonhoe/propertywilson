@@ -1,0 +1,10 @@
+# property.angie-ceo.com robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://property.angie-ceo.com/sitemap.xml
+
+# EU Content Signals
+search: yes
+ai-input: yes
+ai-train: no
