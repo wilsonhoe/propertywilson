@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTO vs Resale Decision Tool | PropertyWilson</title>
+<meta name="description" content="Should you buy BTO or Resale in Singapore? Get a dollar-accurate comparison with grants, CPF, renovation costs, and 5-year projections.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://propertywilson.com/bto-vs-resale/">
+<meta property="og:title" content="BTO vs Resale — Which Makes You $X Better Off?">
+<meta property="og:description" content="Free Singapore BTO vs Resale financial comparison tool. See your real total cost, grants, and 5-year outcome before you commit.">
+<meta property="og:url" content="https://propertywilson.com/bto-vs-resale/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://propertywilson.com/bto-vs-resale/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#1a3a5c;--accent:#e8a838;--bg:#f7f8fa;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--green:#10b981;--red:#ef4444;--border:#e5e7eb;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:900px;margin:0 auto;padding:20px}
+header{text-align:center;padding:40px 0 30px}
+header h1{font-size:clamp(1.6rem,4vw,2.4rem);color:var(--primary);font-weight:800;margin-bottom:8px}
+header .subtitle{color:var(--muted);font-size:1rem;margin-bottom:4px}
+header .urgency{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600;display:inline-block;margin-top:12px}
+section{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+section h2{font-size:1.15rem;color:var(--primary);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+label{display:block;font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:4px}
+label .hint{font-weight:400;color:var(--muted);font-size:.75rem}
+input,select{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;background:#fff;transition:border-color .2s}
+input:focus,select:focus{outline:none;border-color:var(--accent)}
+.btn{display:inline-block;padding:14px 32px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s;text-align:center}
+.btn:hover{background:#0f2a44}
+.btn-accent{background:var(--accent);color:#000}
+.btn-accent:hover{background:#d4922e}
+.btn-full{width:100%}
+.results{display:none}
+.result-card{border:2px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;position:relative}
+.result-card.winner{border-color:var(--green);background:linear-gradient(135deg,#ecfdf5,#d1fae5)}
+.result-card h3{font-size:1.1rem;margin-bottom:12px}
+.result-card .big-number{font-size:2rem;font-weight:800;margin:8px 0}
+.result-card .big-number.green{color:var(--green)}
+.result-card .big-number.red{color:var(--red)}
+.result-card .detail-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.result-card .detail-row:last-child{border:none}
+.result-card .detail-row .label{color:var(--muted)}
+.result-card .detail-row .value{font-weight:600}
+.verdict{background:var(--primary);color:#fff;border-radius:var(--radius);padding:24px;text-align:center;margin:20px 0}
+.verdict h3{font-size:1.3rem;margin-bottom:8px}
+.verdict .amount{font-size:2.2rem;font-weight:800;color:var(--accent)}
+.verdict p{margin-top:8px;opacity:.9;font-size:.95rem}
+.comparison-table{width:100%;border-collapse:collapse;margin:16px 0}
+.comparison-table th,.comparison-table td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:.88rem}
+.comparison-table th{background:var(--primary);color:#fff;font-weight:600}
+.comparison-table th:first-child{border-radius:8px 0 0 0}
+.comparison-table th:last-child{border-radius:0 8px 0 0}
+.comparison-table tr:hover{background:#f0f9ff}
+.comparison-table .highlight{background:#ecfdf5;font-weight:600}
+.cta-section{text-align:center;padding:30px 0;background:linear-gradient(135deg,#1a3a5c,#2d5a88);border-radius:var(--radius);color:#fff;margin:30px 0}
+.cta-section h3{font-size:1.3rem;margin-bottom:8px}
+.cta-section p{opacity:.85;margin-bottom:16px;font-size:.95rem}
+footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.8rem}
+.disclaimer{background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;font-size:.8rem;color:#92400e;margin-top:20px}
+.tag{display:inline-block;background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:4px;font-size:.75rem;font-weight:600;margin-right:4px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>BTO vs Resale — Which Makes You Better Off?</h1>
+  <p class="subtitle">Free Singapore financial comparison — see your real total cost, grants &amp; 5-year outcome</p>
+  <div class="urgency">⏰ HFE deadline: 15 Sep 2026 — 16 days left. Don't commit blind.</div>
+</header>
+
+<section id="input-section">
+<h2>📝 Your Situation</h2>
+<div class="form-row">
+  <div>
+    <label>Flat Type <span class="hint">(BTO flats are subsidised; resale has more location choice)</span></label>
+    <select id="flatType">
+      <option value="3">3-Room (~70 sqm)</option>
+      <option value="4" selected>4-Room (~90 sqm)</option>
+      <option value="5">5-Room (~110 sqm)</option>
+    </select>
+  </div>
+  <div>
+    <label>Combined Monthly Income <span class="hint">(you + spouse, before CPF deduction)</span></label>
+    <select id="income">
+      <option value="6500">$6,500 or below</option>
+      <option value="8000">$6,501 – $8,000</option>
+      <option value="9000">$8,001 – $9,000</option>
+      <option value="10000" selected>$9,001 – $10,000</option>
+      <option value="11000">$10,001 – $11,000</option>
+      <option value="12000">$10,001 – $12,000</option>
+      <option value="14000">$12,001 – $14,000</option>
+      <option value="16000">$14,001 – $16,000</option>
+      <option value="16001">Above $16,000</option>
+    </select>
+  </div>
+</div>
+<div class="form-row">
+  <div>
+    <label>First-Time Applicant? <span class="hint">(affects EHG, proximity grant, priority)</span></label>
+    <select id="firstTimer">
+      <option value="yes" selected>Yes — First-Timer</option>
+      <option value="no">No — Second-Timer</option>
+    </select>
+  </div>
+  <div>
+    <label>Living Near Parents? <span class="hint">(Proximity Housing Grant: stay within 4km)</span></label>
+    <select id="nearParents">
+      <option value="yes">Yes — within 4km</option>
+      <option value="no" selected>No</option>
+    </select>
+  </div>
+</div>
+<div class="form-row">
+  <div>
+    <label>Target Town <span class="hint">(affects BTO price &amp; resale market rate)</span></label>
+    <select id="town">
+      <option value="mature" selected>Mature Estate (AMK, Bishan, Queenstown, etc.)</option>
+      <option value="non-mature">Non-Mature Estate (Punggol, Sengkang, Tengah, etc.)</option>
+    </select>
+  </div>
+  <div>
+    <label>Planned Stay Duration <span class="hint">(5-year MOP applies to both BTO &amp; resale)</span></label>
+    <select id="stayDuration">
+      <option value="5">5 years (MOP minimum)</option>
+      <option value="10" selected>10 years</option>
+      <option value="15">15 years</option>
+      <option value="20">20+ years</option>
+    </select>
+  </div>
+</div>
+<div style="text-align:center;margin-top:8px">
+  <button class="btn btn-accent btn-full" onclick="calculate()">🔍 Calculate My Outcome</button>
+</div>
+</section>
+
+<section id="results-section" class="results">
+<h2>📊 Your Personalised Comparison</h2>
+
+<div class="verdict" id="verdict"></div>
+
+<div id="result-cards"></div>
+
+<h2 style="margin-top:24px">📋 Full Breakdown</h2>
+<table class="comparison-table" id="comparison-table">
+  <thead>
+    <tr><th>Factor</th><th>BTO</th><th>Resale</th></tr>
+  </thead>
+  <tbody id="comparison-body"></tbody>
+</table>
+
+<div class="disclaimer">
+  <strong>⚠️ Important:</strong> This tool provides estimates based on publicly available HDB data and current market conditions (Aug 2026). Actual prices, grants, and valuations vary by specific flat, location, and individual circumstances. Consult a licensed property advisor for personalised advice. Wilson Yeu, CEA R073422I, PropNex Realty Pte Ltd.
+</div>
+</section>
+
+<section class="cta-section">
+  <h3>💡 Want a Full Personalised Report?</h3>
+  <p>Get a detailed PDF with town-by-town analysis, CPF optimisation, and 10-year projections</p>
+  <a href="https://buy.stripe.com/14A14p2X4dCl4Yp1WVew800" class="btn btn-accent" style="text-decoration:none">Get Full Report — $39</a>
+</section>
+
+<footer>
+  <p>Built by <strong>Wilson Yeu</strong> · PropNex Associate Advisor · CEA R073422I</p>
+  <p><a href="https://propertywilson.com" style="color:var(--primary);text-decoration:none;font-weight:600">propertywilson.com</a> · <a href="https://angie-ceo.com" style="color:var(--muted);text-decoration:none">angie-ceo.com</a></p>
+  <p style="margin-top:8px">Data sources: HDB, MND, URA, MAS. Last updated: Aug 2026.</p>
+</footer>
+
+</div>
+
+<script>
+// === SINGAPORE HDB DATA (Aug 2026) ===
+const DATA = {
+  bto: {
+    3: { mature: { price: 280000, range: [230000, 340000] }, nonMature: { price: 190000, range: [150000, 230000] } },
+    4: { mature: { price: 420000, range: [360000, 490000] }, nonMature: { price: 290000, range: [240000, 350000] } },
+    5: { mature: { price: 520000, range: [440000, 600000] }, nonMature: { price: 370000, range: [310000, 440000] } }
+  },
+  resale: {
+    3: { mature: { price: 420000, range: [370000, 480000] }, nonMature: { price: 320000, range: [270000, 380000] } },
+    4: { mature: { price: 560000, range: [490000, 640000] }, nonMature: { price: 430000, range: [370000, 500000] } },
+    5: { mature: { price: 720000, range: [640000, 820000] }, nonMature: { price: 530000, range: [460000, 610000] } }
+  },
+  ehg: [
+    { max: 6500, amount: 80000 },
+    { max: 8000, amount: 60000 },
+    { max: 9000, amount: 50000 },
+    { max: 10000, amount: 40000 },
+    { max: 11000, amount: 30000 },
+    { max: 12000, amount: 20000 },
+    { max: 14000, amount: 10000 },
+    { max: 16000, amount: 0 }
+  ],
+  shg: 40000, // Special CPF Housing Grant (non-mature, income ≤ $8,500)
+  proximityGrant: 30000, // PHG — $10K living with, $20K within 4km — using max $30K for staying near
+  btoReno: { 3: 35000, 4: 45000, 5: 55000 }, // renovation cost
+  resaleReno: { 3: 15000, 4: 20000, 5: 25000 }, // resale flats usually already renovated
+  stampDutyResale: [
+    { max: 180000, rate: 0.01 },
+    { max: 360000, rate: 0.02 },
+    { max: 1000000, rate: 0.03 },
+    { max: Infinity, rate: 0.04 }
+  ],
+  legalFees: { bto: 2000, resale: 3000 },
+  valuationFee: { bto: 0, resale: 250 },
+  agentCommission: { resale: 0.01 }, // 1% of resale price (buyer doesn't pay — seller does — but many negotiate)
+  cpfOA_rate: 0.025, // 2.5% p.a. OA interest
+  hdbLoan_rate: 0.026, // 2.6% p.a. HDB concessionary
+  bankLoan_rate: 0.028, // ~2.8% p.a. estimate
+  waitTime: { mature: 48, nonMature: 36 }, // months to get keys
+  mop: 60, // 5 years months
+  resaleLevy: { 3: 30000, 4: 40000, 5: 50000 }, // if second-timer BTO
+  appreciationRate: { bto: 0.03, resale: 0.02 }, // annual % estimate (BTO tends to appreciate faster from lower base)
+  rentalSavings: 1500 // monthly rent saved while waiting for BTO
+};
+
+function getEHG(income) {
+  for (let tier of DATA.ehg) {
+    if (income <= tier.max) return tier.amount;
+  }
+  return 0;
+}
+
+function getSHG(income, town) {
+  if (town === 'non-mature' && income <= 8500) return DATA.shg;
+  return 0;
+}
+
+function calcStampDuty(price) {
+  let duty = 0;
+  let remaining = price;
+  let prev = 0;
+  for (let bracket of DATA.stampDutyResale) {
+    let taxable = Math.min(remaining, bracket.max - prev);
+    duty += taxable * bracket.rate;
+    remaining -= taxable;
+    if (remaining <= 0) break;
+    prev = bracket.max;
+  }
+  return Math.round(duty);
+}
+
+function fmt(n) {
+  if (n < 0) return '-$' + Math.abs(n).toLocaleString('en-SG');
+  return '$' + n.toLocaleString('en-SG');
+}
+
+function calculate() {
+  const flatType = parseInt(document.getElementById('flatType').value);
+  const income = parseInt(document.getElementById('income').value);
+  const firstTimer = document.getElementById('firstTimer').value === 'yes';
+  const nearParents = document.getElementById('nearParents').value === 'yes';
+  const town = document.getElementById('town').value;
+  const stayYears = parseInt(document.getElementById('stayDuration').value);
+
+  const townKey = town === 'mature' ? 'mature' : 'nonMature';
+
+  // === BTO CALCULATION ===
+  const btoPrice = DATA.bto[flatType][townKey].price;
+  const ehg = firstTimer ? getEHG(income) : 0;
+  const shg = (firstTimer && town === 'non-mature' && income <= 8500) ? DATA.shg : 0;
+  const proximityGrant = (nearParents && firstTimer) ? DATA.proximityGrant : 0;
+  const btoGrants = ehg + shg + proximityGrant;
+  const resaleLevy = firstTimer ? 0 : DATA.resaleLevy[flatType];
+  const btoNetPrice = btoPrice - btoGrants + resaleLevy;
+  const btoReno = DATA.btoReno[flatType];
+  const btoLegal = DATA.legalFees.bto;
+  const btoStampDuty = calcStampDuty(btoNetPrice); // BTO also has BSD
+  const btoWaitMonths = DATA.waitTime[townKey];
+  const btoRentCost = btoWaitMonths * DATA.rentalSavings; // opportunity cost of waiting
+  const btoTotalCost = btoNetPrice + btoReno + btoLegal + btoStampDuty + btoRentCost;
+
+  // BTO future value
+  const btoAppreciation = Math.pow(1 + DATA.appreciationRate.bto, stayYears);
+  const btoFutureValue = btoPrice * btoAppreciation;
+
+  // === RESALE CALCULATION ===
+  const resalePrice = DATA.resale[flatType][townKey].price;
+  const resaleEHG = firstTimer ? getEHG(income) : 0;
+  const resaleProximity = (nearParents && firstTimer) ? DATA.proximityGrant : 0;
+  const resaleGrants = resaleEHG + resaleProximity; // no SHG for resale
+  const resaleNetPrice = resalePrice - resaleGrants;
+  const resaleReno = DATA.resaleReno[flatType];
+  const resaleLegal = DATA.legalFees.resale;
+  const resaleValuation = DATA.valuationFee.resale;
+  const resaleStampDuty = calcStampDuty(resaleNetPrice);
+  const resaleTotalCost = resaleNetPrice + resaleReno + resaleLegal + resaleValuation + resaleStampDuty;
+
+  // Resale future value (already existing flat, slower appreciation)
+  const resaleAppreciation = Math.pow(1 + DATA.appreciationRate.resale, stayYears);
+  const resaleFutureValue = resalePrice * resaleAppreciation;
+
+  // === OUTCOME ===
+  const btoNetOutcome = btoFutureValue - btoTotalCost;
+  const resaleNetOutcome = resaleFutureValue - resaleTotalCost;
+  const difference = Math.abs(btoNetOutcome - resaleNetOutcome);
+  const btoBetter = btoNetOutcome > resaleNetOutcome;
+
+  // === VERDICT ===
+  const verdict = document.getElementById('verdict');
+  if (btoBetter) {
+    verdict.innerHTML = `
+      <h3>🏆 BTO is better for you by ${fmt(difference)}</h3>
+      <div class="amount">${fmt(difference)} advantage</div>
+      <p>Over ${stayYears} years, BTO saves you ${fmt(difference)} compared to resale — even after ${btoWaitMonths} months of waiting and renovation costs.</p>
+    `;
+  } else {
+    verdict.innerHTML = `
+      <h3>🏆 Resale is better for you by ${fmt(difference)}</h3>
+      <div class="amount">${fmt(difference)} advantage</div>
+      <p>Over ${stayYears} years, Resale saves you ${fmt(difference)} compared to BTO — immediate move-in and lower renovation costs tip the scale.</p>
+    `;
+  }
+
+  // === RESULT CARDS ===
+  const cards = document.getElementById('result-cards');
+  cards.innerHTML = `
+    <div class="result-card ${btoBetter ? 'winner' : ''}">
+      <h3>${btoBetter ? '🏆 ' : ''}BTO ${flatType}-Room (${townKey === 'mature' ? 'Mature' : 'Non-Mature'} Estate)</h3>
+      <div class="detail-row"><span class="label">Purchase Price</span><span class="value">${fmt(btoPrice)}</span></div>
+      <div class="detail-row"><span class="label">Grants (EHG${shg > 0 ? ' + SHG' : ''}${proximityGrant > 0 ? ' + PHG' : ''})</span><span class="value" style="color:var(--green)">-${fmt(btoGrants)}</span></div>
+      ${!firstTimer ? `<div class="detail-row"><span class="label">Resale Levy</span><span class="value" style="color:var(--red)">+${fmt(resaleLevy)}</span></div>` : ''}
+      <div class="detail-row"><span class="label">Net Price</span><span class="value">${fmt(btoNetPrice)}</span></div>
+      <div class="detail-row"><span class="label">Renovation</span><span class="value">${fmt(btoReno)}</span></div>
+      <div class="detail-row"><span class="label">Legal + Stamp Duty</span><span class="value">${fmt(btoLegal + btoStampDuty)}</span></div>
+      <div class="detail-row"><span class="label">Rent While Waiting (${btoWaitMonths} months)</span><span class="value">${fmt(btoRentCost)}</span></div>
+      <div class="detail-row" style="border-top:2px solid var(--primary);margin-top:8px;padding-top:10px"><span class="label" style="font-weight:700">Total Cost</span><span class="value" style="font-weight:800;font-size:1.1rem">${fmt(btoTotalCost)}</span></div>
+      <div class="detail-row"><span class="label">${stayYears}-Year Value</span><span class="value">${fmt(Math.round(btoFutureValue))}</span></div>
+      <div class="detail-row" style="border-top:2px solid ${btoBetter ? 'var(--green)' : 'var(--border)'};margin-top:8px;padding-top:10px"><span class="label" style="font-weight:700">Net Outcome</span><span class="value" style="font-weight:800;font-size:1.2rem;color:${btoNetOutcome >= 0 ? 'var(--green)' : 'var(--red)'}">${fmt(Math.round(btoNetOutcome))}</span></div>
+    </div>
+    <div class="result-card ${!btoBetter ? 'winner' : ''}">
+      <h3>${!btoBetter ? '🏆 ' : ''}Resale ${flatType}-Room (${townKey === 'mature' ? 'Mature' : 'Non-Mature'} Estate)</h3>
+      <div class="detail-row"><span class="label">Purchase Price</span><span class="value">${fmt(resalePrice)}</span></div>
+      <div class="detail-row"><span class="label">Grants (EHG${resaleProximity > 0 ? ' + PHG' : ''})</span><span class="value" style="color:var(--green)">-${fmt(resaleGrants)}</span></div>
+      <div class="detail-row"><span class="label">Net Price</span><span class="value">${fmt(resaleNetPrice)}</span></div>
+      <div class="detail-row"><span class="label">Renovation</span><span class="value">${fmt(resaleReno)}</span></div>
+      <div class="detail-row"><span class="label">Legal + Valuation + Stamp Duty</span><span class="value">${fmt(resaleLegal + resaleValuation + resaleStampDuty)}</span></div>
+      <div class="detail-row"><span class="label">Wait Time</span><span class="value" style="color:var(--green)">Immediate</span></div>
+      <div class="detail-row" style="border-top:2px solid var(--primary);margin-top:8px;padding-top:10px"><span class="label" style="font-weight:700">Total Cost</span><span class="value" style="font-weight:800;font-size:1.1rem">${fmt(resaleTotalCost)}</span></div>
+      <div class="detail-row"><span class="label">${stayYears}-Year Value</span><span class="value">${fmt(Math.round(resaleFutureValue))}</span></div>
+      <div class="detail-row" style="border-top:2px solid ${!btoBetter ? 'var(--green)' : 'var(--border)'};margin-top:8px;padding-top:10px"><span class="label" style="font-weight:700">Net Outcome</span><span class="value" style="font-weight:800;font-size:1.2rem;color:${resaleNetOutcome >= 0 ? 'var(--green)' : 'var(--red)'}">${fmt(Math.round(resaleNetOutcome))}</span></div>
+    </div>
+  `;
+
+  // === COMPARISON TABLE ===
+  const tbody = document.getElementById('comparison-body');
+  const rows = [
+    ['Purchase Price', fmt(btoPrice), fmt(resalePrice)],
+    ['Grants', fmt(btoGrants), fmt(resaleGrants)],
+    ['Net Price', fmt(btoNetPrice), fmt(resaleNetPrice)],
+    ['Renovation', fmt(btoReno), fmt(resaleReno)],
+    ['Legal & Fees', fmt(btoLegal + btoStampDuty), fmt(resaleLegal + resaleValuation + resaleStampDuty)],
+    ['Wait Cost (rent)', fmt(btoRentCost) + ` (${btoWaitMonths}mo)`, '$0 (immediate)'],
+    ['Total Cost', fmt(btoTotalCost), fmt(resaleTotalCost)],
+    [`${stayYears}-Year Projected Value`, fmt(Math.round(btoFutureValue)), fmt(Math.round(resaleFutureValue))],
+    ['Net Outcome', fmt(Math.round(btoNetOutcome)), fmt(Math.round(resaleNetOutcome))],
+    ['Time to Keys', `${btoWaitMonths} months`, 'Immediate'],
+    ['MOP', '5 years', '5 years'],
+  ];
+
+  tbody.innerHTML = rows.map((r, i) => {
+    const highlight = (i === rows.length - 3) ? ' class="highlight"' : '';
+    return `<tr${highlight}><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`;
+  }).join('');
+
+  document.getElementById('results-section').style.display = 'block';
+  document.getElementById('results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
