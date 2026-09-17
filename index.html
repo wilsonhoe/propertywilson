@@ -834,6 +834,57 @@
     </div>
 </section>
 
+<!-- STAMP DUTY + ABSD CALCULATOR -->
+<section class="tool-section" id="stamp-duty">
+    <div class="section-label fade-up">Decision Tool</div>
+    <div class="section-title fade-up">Stamp Duty &amp; <span class="gradient">ABSD</span></div>
+    <div class="section-desc fade-up">Your real buying cost includes BSD on every purchase — and ABSD on top if you're a second home, foreign buyer, or entity. See the exact tax before you commit.</div>
+
+    <div class="tool-grid fade-up d2">
+        <div class="node-card tool-card">
+            <div class="node-header"><span class="node-dot purple"></span> <span class="node-type">Input</span></div>
+            <div style="padding:20px;">
+                <div class="tool-field">
+                    <label for="sd-price">Property Price (S$)</label>
+                    <input type="number" id="sd-price" value="1500000" min="0" step="10000">
+                </div>
+                <div class="tool-field">
+                    <label for="sd-profile">Buyer Profile</label>
+                    <select id="sd-profile">
+                        <option value="sc1">Singapore Citizen — 1st residential property</option>
+                        <option value="sc2">Singapore Citizen — 2nd property</option>
+                        <option value="sc3">Singapore Citizen — 3rd+ property</option>
+                        <option value="pr1">PR — 1st property</option>
+                        <option value="pr2">PR — 2nd property</option>
+                        <option value="pr3">PR — 3rd+ property</option>
+                        <option value="foreign">Foreigner</option>
+                        <option value="entity">Entity</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="node-card tool-card">
+            <div class="node-header"><span class="node-dot rose"></span> <span class="node-type">Result</span></div>
+            <div style="padding:20px;">
+                <div class="tool-result">
+                    <div class="result-label">Total Stamp Duty Payable</div>
+                    <div class="result-number" id="sd-total">—</div>
+                    <div class="result-rows">
+                        <div class="result-row"><span>Buyer's Stamp Duty (BSD)</span><span id="sd-bsd">—</span></div>
+                        <div class="result-row"><span>Additional (ABSD)</span><span id="sd-absd">—</span></div>
+                        <div class="result-row"><span>ABSD rate</span><span id="sd-rate">—</span></div>
+                        <div class="result-row"><span>Effective tax % of price</span><span id="sd-eff">—</span></div>
+                    </div>
+                </div>
+                <div class="tool-note">BSD uses progressive rates (1% to 6%). ABSD rates as published by IRAS for residential property — apply if triggered by your profile. Not a substitute for IRAS computation.</div>
+                <div class="tool-cta">
+                    <a href="https://wa.me/6591448211?text=Hi%20Wilson%2C%20I%20checked%20my%20stamp%20duty%20and%20want%20to%20confirm%20my%20figures" class="btn-primary" style="font-size:14px;padding:12px 24px;">💬 Confirm My Figures</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ZONES -->
 <section class="zones" id="zones">
     <div class="zones-inner">
@@ -1067,6 +1118,68 @@
         $(id).addEventListener('input', compute);
         $(id).addEventListener('change', compute);
     });
+    compute();
+})();
+</script>
+
+<!-- Stamp Duty + ABSD Calculator Logic -->
+<script>
+(function () {
+    const $ = (id) => document.getElementById(id);
+
+    // BSD progressive bands per IRAS (residential)
+    const BSD_BANDS = [
+        [180000, 0.01], [360000, 0.02], [600000, 0.03],
+        [1000000, 0.04], [1500000, 0.05], [Infinity, 0.06]
+    ];
+
+    // ABSD rates by buyer profile (residential, current published rates)
+    const ABSD = {
+        sc1: 0.00,  // SC 1st
+        sc2: 0.20,  // SC 2nd
+        sc3: 0.30,  // SC 3rd+
+        pr1: 0.05,  // PR 1st
+        pr2: 0.30,  // PR 2nd
+        pr3: 0.35,  // PR 3rd+
+        foreign: 0.60, // Foreigner
+        entity: 0.65   // Entity
+    };
+
+    function bsd(price) {
+        let prev = 0, tax = 0;
+        for (const [cap, rate] of BSD_BANDS) {
+            const slice = Math.max(0, Math.min(price, cap) - prev);
+            tax += slice * rate;
+            prev = cap;
+            if (price <= cap) break;
+        }
+        return tax;
+    }
+
+    function fmt(n) {
+        if (!isFinite(n) || n < 0) return '—';
+        return 'S$' + Math.round(n).toLocaleString('en-SG');
+    }
+
+    function compute() {
+        const price = parseFloat($('sd-price').value) || 0;
+        const profile = $('sd-profile').value;
+        const b = bsd(price);
+        const absdRate = ABSD[profile] || 0;
+        const a = price * absdRate;
+        const total = b + a;
+        const eff = price > 0 ? (total / price * 100) : 0;
+
+        $('sd-bsd').textContent = fmt(b);
+        $('sd-absd').textContent = fmt(a);
+        $('sd-total').textContent = fmt(total);
+        $('sd-rate').textContent = (absdRate * 100).toFixed(0) + '%';
+        $('sd-eff').textContent = eff.toFixed(2) + '%';
+    }
+
+    $('sd-price').addEventListener('input', compute);
+    $('sd-price').addEventListener('change', compute);
+    $('sd-profile').addEventListener('change', compute);
     compute();
 })();
 </script>
