@@ -416,13 +416,37 @@
         .why-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
         .why-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
 
+        /* ===================== CALCULATOR TOOL ===================== */
+        .tool-section { max-width: 1280px; margin: 0 auto; padding: 80px 32px; }
+        .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; align-items: start; }
+        .tool-card { padding: 24px; }
+        .tool-field { margin-bottom: 18px; }
+        .tool-field label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; font-weight: 600; }
+        .tool-field input, .tool-field select {
+            width: 100%; padding: 12px 14px; background: var(--bg-surface-3); border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-sm); color: var(--text-primary); font-size: 15px; font-family: var(--font-mono);
+            box-sizing: border-box; transition: border-color 0.2s;
+        }
+        .tool-field input:focus, .tool-field select:focus { outline: none; border-color: var(--accent-indigo); }
+        .tool-field select { font-family: var(--font-sans); }
+        .tool-result { margin-top: 20px; padding: 20px; background: var(--bg-surface-2); border: 1px solid var(--border-active); border-radius: var(--radius-md); }
+        .tool-result .result-number { font-size: 30px; font-weight: 800; color: var(--accent-cyan); font-family: var(--font-mono); }
+        .tool-result .result-label { font-size: 12px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+        .tool-result .bound { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 6px 12px; background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); border-radius: 999px; font-size: 12px; color: #fca5a5; font-weight: 600; }
+        .tool-result .bound.pass { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: var(--accent-green); }
+        .result-rows { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .result-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-secondary); border-bottom: 1px dashed var(--border-hairline); padding-bottom: 6px; }
+        .result-row span:last-child { color: var(--text-primary); font-family: var(--font-mono); }
+        .tool-note { font-size: 11px; color: var(--text-tertiary); margin-top: 14px; line-height: 1.6; }
+        .tool-cta { margin-top: 16px; }
+        @media (max-width: 900px) { .tool-grid { grid-template-columns: 1fr; } }
+
         /* ===================== CTA ===================== */
         .cta-section {
             background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(99,102,241,0.04), rgba(6,182,212,0.03));
             border-top: 1px solid var(--border-hairline); border-bottom: 1px solid var(--border-hairline);
         }
         .cta-inner { max-width: 800px; margin: 0 auto; padding: 80px 32px; text-align: center; }
-        .cta-inner h2 { font-size: 36px; font-weight: 800; margin-bottom: 16px; }
         .cta-inner p { font-size: 17px; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.6; }
         .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
@@ -433,6 +457,13 @@
         .footer-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; }
         .footer-links a:hover { color: #a78bfa; }
         .footer-cea { font-size: 11px; color: var(--text-tertiary); margin-top: 8px; line-height: 1.5; }
+        .footer-disclaimer {
+            max-width: 1280px; margin: 0 auto; padding: 20px 32px 40px; text-align: center;
+            border-top: 1px solid var(--border-hairline);
+        }
+        .footer-disclaimer p {
+            font-size: 11px; color: var(--text-tertiary); line-height: 1.6; max-width: 900px; margin: 0 auto;
+        }
 
         /* ===================== SECTION HEADERS ===================== */
         .section { max-width: 1280px; margin: 0 auto; padding: 80px 32px; }
@@ -740,6 +771,69 @@
     </div>
 </section>
 
+<!-- AFFORDABILITY CALCULATOR (Roov-style decision tool) -->
+<section class="tool-section" id="tools">
+    <div class="section-label fade-up">Decision Tool</div>
+    <div class="section-title fade-up">How Much Can I <span class="gradient">Borrow?</span></div>
+    <div class="section-desc fade-up">Know your number before anyone quotes you one. Enter your income and debts — MAS rules applied in the order a bank applies them, and the page tells you which rule bound.</div>
+
+    <div class="tool-grid fade-up d2">
+        <div class="node-card tool-card">
+            <div class="node-header"><span class="node-dot cyan"></span> <span class="node-type">Input</span></div>
+            <div style="padding:20px;">
+                <div class="tool-field">
+                    <label for="t-income">Gross Monthly Income (S$)</label>
+                    <input type="number" id="t-income" value="12000" min="0" step="100">
+                </div>
+                <div class="tool-field">
+                    <label for="t-debt">Other Monthly Debt Payments (S$)</label>
+                    <input type="number" id="t-debt" value="0" min="0" step="50">
+                </div>
+                <div class="tool-field">
+                    <label for="t-cash">Cash + CPF Downpayment (S$)</label>
+                    <input type="number" id="t-cash" value="200000" min="0" step="10000">
+                </div>
+                <div class="tool-field">
+                    <label for="t-type">Property Type</label>
+                    <select id="t-type">
+                        <option value="private">Private (Condo / Landed)</option>
+                        <option value="hdb">HDB / EC (via loan)</option>
+                    </select>
+                </div>
+                <div class="tool-field">
+                    <label for="t-rate">Loan Interest Rate (%)</label>
+                    <input type="number" id="t-rate" value="4.0" min="0" step="0.1">
+                </div>
+                <div class="tool-field">
+                    <label for="t-tenure">Loan Tenure (years)</label>
+                    <input type="number" id="t-tenure" value="30" min="1" max="35" step="1">
+                </div>
+            </div>
+        </div>
+        <div class="node-card tool-card">
+            <div class="node-header"><span class="node-dot green"></span> <span class="node-type">Result</span></div>
+            <div style="padding:20px;">
+                <div class="tool-result">
+                    <div class="result-label">Max Property Price</div>
+                    <div class="result-number" id="res-price">—</div>
+                    <div class="bound" id="res-bound"></div>
+                    <div class="result-rows">
+                        <div class="result-row"><span>Max loan amount</span><span id="res-loan">—</span></div>
+                        <div class="result-row"><span>Buyer's Stamp Duty (BSD)</span><span id="res-bsd">—</span></div>
+                        <div class="result-row"><span>Monthly at 4% floor</span><span id="res-monthly">—</span></div>
+                        <div class="result-row"><span>Downpayment needed</span><span id="res-downpay">—</span></div>
+                        <div class="result-row"><span>Loan tenure</span><span id="res-tenure">—</span></div>
+                    </div>
+                </div>
+                <div class="tool-note">Estimates use current MAS rules (TDSR 55%, MSR 30%, LTV 75%, 4% stress floor) and BSD progressive rates. For illustration only — talk to me and I'll run your exact figures.</div>
+                <div class="tool-cta">
+                    <a href="https://wa.me/6591448211?text=Hi%20Wilson%2C%20I%20ran%20the%20affordability%20calculator%20and%20want%20to%20check%20my%20exact%20figures" class="btn-primary" style="font-size:14px;padding:12px 24px;">💬 Check My Exact Figures</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ZONES -->
 <section class="zones" id="zones">
     <div class="zones-inner">
@@ -843,6 +937,11 @@
     </div>
 </footer>
 
+<!-- Disclaimer -->
+<div class="footer-disclaimer">
+    <p>PropNex Realty Pte. Ltd or its salespersons will not be responsible for any errors or omissions or for the results obtained from the use of this information. All information is provided with no guarantee of accuracy. If in doubt, kindly seek appropriate advice from your financial advisors or bankers before you make any property investment decisions</p>
+</div>
+
 <!-- Scroll Animation -->
 <script>
     const observer = new IntersectionObserver((entries) => {
@@ -854,6 +953,122 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+<!-- Affordability Calculator Logic (Roov-style: which rule bound) -->
+<script>
+(function () {
+    // MAS rules in force (as of 2026). Kept simple + transparent.
+    const TDSR = 0.55;        // Total Debt Servicing Ratio
+    const MSR = 0.30;         // Mortgage Servicing Ratio (HDB / EC via loan)
+    const LTV_FIRST = 0.75;   // First housing loan
+    const STRESS_FLOOR = 4.0; // MAS 4% stress floor
+
+    const $ = (id) => document.getElementById(id);
+
+    // BSD progressive rates (S$)
+    function bsd(price) {
+        const bands = [
+            [180000, 0.01], [360000, 0.02], [600000, 0.03],
+            [1000000, 0.04], [1500000, 0.05], [Infinity, 0.06]
+        ];
+        let prev = 0, tax = 0;
+        for (const [cap, rate] of bands) {
+            const slice = Math.max(0, Math.min(price, cap) - prev);
+            tax += slice * rate;
+            prev = cap;
+            if (price <= cap) break;
+        }
+        return tax;
+    }
+
+    // Monthly payment on a loan at annual rate %
+    function monthlyPayment(principal, annualRatePct, years) {
+        if (principal <= 0 || years <= 0) return 0;
+        const r = annualRatePct / 100 / 12;
+        const n = years * 12;
+        if (r === 0) return principal / n;
+        return principal * r / (1 - Math.pow(1 + r, -n));
+    }
+
+    function fmt(n) {
+        if (!isFinite(n) || n < 0) return '—';
+        return 'S$' + Math.round(n).toLocaleString('en-SG');
+    }
+
+    function compute() {
+        const income = parseFloat($('t-income').value) || 0;
+        const otherDebt = parseFloat($('t-debt').value) || 0;
+        const cash = parseFloat($('t-cash').value) || 0;
+        const type = $('t-type').value;
+        const rate = parseFloat($('t-rate').value) || STRESS_FLOOR;
+        const tenure = parseFloat($('t-tenure').value) || 30;
+
+        const floorRate = Math.max(rate, STRESS_FLOOR); // apply 4% floor
+
+        // Rule caps on monthly mortgage payment
+        const incomeCap = income * TDSR - otherDebt;      // TDSR 55%
+        const msrCap = type === 'hdb' ? income * MSR : Infinity; // MSR 30% for HDB/EC
+        const maxMonthly = Math.min(incomeCap, msrCap);
+
+        // Which rule bound?
+        let bound = 'TDSR 55%';
+        if (msrCap < incomeCap) bound = 'MSR 30%';
+
+        // Max loan from monthly cap, solved via amortisation
+        const r = floorRate / 100 / 12;
+        const n = tenure * 12;
+        let maxLoan = 0;
+        if (r > 0 && maxMonthly > 0) {
+            maxLoan = maxMonthly * (1 - Math.pow(1 + r, -n)) / r;
+        }
+
+        // LTV cap (first loan 75%) → max price from loan, incl BSD
+        const ltvMaxLoan = cash / 0.25; // rough: downpayment = 25%
+        let price = ltvMaxLoan;
+        // also bounded by loan + LTV: price*0.75 >= maxLoan → price >= maxLoan/0.75
+        price = Math.max(price, maxLoan / LTV_FIRST);
+        // downpayment constraint: price - loan <= cash (loan capped at maxLoan)
+        // try to find price where loan at LTV + BSD fits cash
+        price = price + bsd(price);
+
+        // Recompute cleanly: max price = min( ltvMaxPrice, loanMaxPrice )
+        // Downpayment = price - loan. Solve iteratively.
+        let lo = 0, hi = Math.max(income * 1000, cash * 50, 50000000);
+        for (let i = 0; i < 60; i++) {
+            const mid = (lo + hi) / 2;
+            const loan = mid * LTV_FIRST;
+            const downpay = mid - loan + bsd(mid);
+            if (loan > maxLoan || downpay > cash) {
+                hi = mid;
+            } else {
+                lo = mid;
+            }
+        }
+        price = lo;
+
+        const loan = price * LTV_FIRST;
+        const downpay = price - loan + bsd(price);
+        const monthly = monthlyPayment(loan, floorRate, tenure);
+
+        $('res-price').textContent = fmt(price);
+        $('res-loan').textContent = fmt(Math.min(loan, maxLoan));
+        $('res-bsd').textContent = fmt(bsd(price));
+        $('res-monthly').textContent = fmt(monthly);
+        $('res-downpay').textContent = fmt(downpay);
+        $('res-tenure').textContent = tenure + ' years @ ' + floorRate.toFixed(1) + '% floor';
+
+        const boundEl = $('res-bound');
+        boundEl.textContent = 'Bound by ' + bound;
+        boundEl.className = 'bound' + (monthly <= incomeCap && monthly <= msrCap ? ' pass' : '');
+    }
+
+    ['t-income', 't-debt', 't-cash', 't-type', 't-rate', 't-tenure'].forEach(id => {
+        $(id).addEventListener('input', compute);
+        $(id).addEventListener('change', compute);
+    });
+    compute();
+})();
 </script>
 
 </body>
