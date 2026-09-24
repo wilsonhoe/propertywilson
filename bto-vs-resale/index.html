@@ -262,6 +262,11 @@ function calculate() {
   const town = document.getElementById('town').value;
   const stayYears = parseInt(document.getElementById('stayDuration').value);
 
+  // === BTO ELIGIBILITY: household income ceiling ===
+  // Current rule: BTO income ceiling = S$16,000/month for families (NDR 2026, eff. Aug 24 2026).
+  const BTO_MAX_INCOME = 16000;
+  const btoIncomeOverCeiling = income > BTO_MAX_INCOME;
+
   const townKey = town === 'mature' ? 'mature' : 'nonMature';
 
   // === BTO CALCULATION ===
@@ -305,8 +310,34 @@ function calculate() {
   const difference = Math.abs(btoNetOutcome - resaleNetOutcome);
   const btoBetter = btoNetOutcome > resaleNetOutcome;
 
-  // === VERDICT ===
+  // === BTO DISQUALIFIED BY INCOME CEILING ===
   const verdict = document.getElementById('verdict');
+  const cards = document.getElementById('result-cards');
+  const tbody = document.getElementById('comparison-body');
+  if (btoIncomeOverCeiling) {
+    verdict.innerHTML = `
+      <h3>🚫 BTO is not available to you</h3>
+      <div class="amount">Income above the S$16,000 ceiling</div>
+      <p>Your combined monthly household income exceeds the current <strong>BTO income ceiling of S$${BTO_MAX_INCOME.toLocaleString()}/month</strong>. You are <strong>not eligible to apply for a new BTO flat</strong>. Resale is the recommended path — you can buy immediately and still receive CPF housing grants (subject to the higher resale grant income ceiling).</p>
+    `;
+    cards.innerHTML = `
+      <div class="result-card winner">
+        <h3>🏆 Resale — Recommended for you</h3>
+        <div class="detail-row"><span class="label">Why resale?</span><span class="value">BTO requires income ≤ S$${BTO_MAX_INCOME.toLocaleString()}/month. You exceed this ceiling, so BTO applications are not allowed.</span></div>
+        <div class="detail-row"><span class="label">Buy a ${flatType}-Room resale</span><span class="value">${fmt(resalePrice)} • ${townKey === 'mature' ? 'Mature' : 'Non-Mature'} Estate</span></div>
+        <div class="detail-row"><span class="label">Grants (EHG${resaleProximity > 0 ? ' + PHG' : ''})</span><span class="value" style="color:var(--green)">-${fmt(resaleGrants)}</span></div>
+        <div class="detail-row"><span class="label">Move-in Timing</span><span class="value" style="color:var(--green)">Immediate</span></div>
+        <div class="detail-row" style="border-top:2px solid var(--primary);margin-top:8px;padding-top:10px"><span class="label" style="font-weight:700">Est. Total Cost</span><span class="value" style="font-weight:800;font-size:1.1rem">${fmt(resaleTotalCost)}</span></div>
+      </div>
+      <p style="text-align:center;margin-top:8px;color:var(--muted);font-size:.85rem">Note: You may still qualify for the CPF Housing Grant on a resale flat if your income is within the higher resale grant ceiling.</p>
+    `;
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--muted);padding:14px">BTO comparison omitted — household income exceeds the S$16,000 BTO income ceiling.</td></tr>';
+    document.getElementById('results-section').style.display = 'block';
+    document.getElementById('results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  // === VERDICT ===
   if (btoBetter) {
     verdict.innerHTML = `
       <h3>🏆 BTO is better for you by ${fmt(difference)}</h3>
@@ -322,7 +353,6 @@ function calculate() {
   }
 
   // === RESULT CARDS ===
-  const cards = document.getElementById('result-cards');
   cards.innerHTML = `
     <div class="result-card ${btoBetter ? 'winner' : ''}">
       <h3>${btoBetter ? '🏆 ' : ''}BTO ${flatType}-Room (${townKey === 'mature' ? 'Mature' : 'Non-Mature'} Estate)</h3>
@@ -352,7 +382,6 @@ function calculate() {
   `;
 
   // === COMPARISON TABLE ===
-  const tbody = document.getElementById('comparison-body');
   const rows = [
     ['Purchase Price', fmt(btoPrice), fmt(resalePrice)],
     ['Grants', fmt(btoGrants), fmt(resaleGrants)],
