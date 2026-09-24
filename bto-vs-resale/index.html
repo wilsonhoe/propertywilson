@@ -65,8 +65,13 @@ footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.8rem}
 .tag{display:inline-block;background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:4px;font-size:.75rem;font-weight:600;margin-right:4px}
 </style>
 
-    <!-- Leadfeeder (LeadFeeder/LFDeer visitor tracking) -->
-    <script async src="https://sc.lfeeder.com/lftracker_v1_p1e024B00Vp8GB6d.js"></script>
+    <!-- Leadfeeder (LeadFeeder/LFDeer visitor tracking) — official snippet per app.leadfeeder.com install instructions -->
+    <script>
+    (function(ss,ex){ window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));};
+    (function(d,s){ fs=d.getElementsByTagName(s)[0]; function ce(src){ var cs=d.createElement(s); cs.src=src; cs.async=1; fs.parentNode.insertBefore(cs,fs); };
+    ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); })(document,'script');
+    })('p1e024B00Vp8GB6d');
+    </script>
 </head>
 <body>
 <div class="container">
