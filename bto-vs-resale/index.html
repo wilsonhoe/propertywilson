@@ -191,24 +191,38 @@ const DATA = {
     5: { mature: { price: 720000, range: [640000, 820000] }, nonMature: { price: 530000, range: [460000, 610000] } }
   },
   ehg: [
-    { max: 6500, amount: 80000 },
-    { max: 8000, amount: 60000 },
-    { max: 9000, amount: 50000 },
-    { max: 10000, amount: 40000 },
-    { max: 11000, amount: 30000 },
-    { max: 12000, amount: 20000 },
-    { max: 14000, amount: 10000 },
-    { max: 16000, amount: 0 }
+    { max: 1500, amount: 120000 },
+    { max: 2000, amount: 110000 },
+    { max: 2500, amount: 105000 },
+    { max: 3000, amount: 95000 },
+    { max: 3500, amount: 90000 },
+    { max: 4000, amount: 85000 },
+    { max: 4500, amount: 80000 },
+    { max: 5000, amount: 75000 },
+    { max: 5500, amount: 70000 },
+    { max: 6000, amount: 65000 },
+    { max: 6500, amount: 60000 },
+    { max: 7000, amount: 55000 },
+    { max: 7500, amount: 50000 },
+    { max: 8000, amount: 45000 },
+    { max: 8500, amount: 40000 },
+    { max: 9000, amount: 35000 },
+    { max: 9001, amount: 0 }
   ],
-  shg: 40000, // Special CPF Housing Grant (non-mature, income ≤ $8,500)
-  proximityGrant: 30000, // PHG — $10K living with, $20K within 4km — using max $30K for staying near
+  chg: 80000, // CPF Housing Grant (resale, first-timer families, 2-4 room; 5-room = 50000). Income ceiling S$16,000.
+  // NOTE: the old 'Special CPF Housing Grant' (SHG) was discontinued — replaced by the CPF Housing Grant above.
+  shg: 0, // discontinued
+  proximityGrant: 30000, // PHG — $30K living with parents/child, $20K within 4km (max $30K used here)
   btoReno: { 3: 35000, 4: 45000, 5: 55000 }, // renovation cost
   resaleReno: { 3: 15000, 4: 20000, 5: 25000 }, // resale flats usually already renovated
+  // Buyer's Stamp Duty (BSD), residential, on/after 15 Feb 2023 (IRAS)
   stampDutyResale: [
     { max: 180000, rate: 0.01 },
     { max: 360000, rate: 0.02 },
     { max: 1000000, rate: 0.03 },
-    { max: Infinity, rate: 0.04 }
+    { max: 1500000, rate: 0.04 },
+    { max: 3000000, rate: 0.05 },
+    { max: Infinity, rate: 0.06 }
   ],
   legalFees: { bto: 2000, resale: 3000 },
   valuationFee: { bto: 0, resale: 250 },
@@ -230,9 +244,11 @@ function getEHG(income) {
   return 0;
 }
 
-function getSHG(income, town) {
-  if (town === 'non-mature' && income <= 8500) return DATA.shg;
-  return 0;
+// CPF Housing Grant — resale flats only, first-timer families.
+// Up to $80,000 for 2-4 room; up to $50,000 for 5-room+. Income ceiling S$16,000.
+function getCHG(flatType, town) {
+  if (flatType >= 5) return 50000;
+  return DATA.chg;
 }
 
 function calcStampDuty(price) {
@@ -272,9 +288,8 @@ function calculate() {
   // === BTO CALCULATION ===
   const btoPrice = DATA.bto[flatType][townKey].price;
   const ehg = firstTimer ? getEHG(income) : 0;
-  const shg = (firstTimer && town === 'non-mature' && income <= 8500) ? DATA.shg : 0;
   const proximityGrant = (nearParents && firstTimer) ? DATA.proximityGrant : 0;
-  const btoGrants = ehg + shg + proximityGrant;
+  const btoGrants = ehg + proximityGrant; // BTO: only EHG + PHG apply (CHG is resale-only)
   const resaleLevy = firstTimer ? 0 : DATA.resaleLevy[flatType];
   const btoNetPrice = btoPrice - btoGrants + resaleLevy;
   const btoReno = DATA.btoReno[flatType];
@@ -292,7 +307,8 @@ function calculate() {
   const resalePrice = DATA.resale[flatType][townKey].price;
   const resaleEHG = firstTimer ? getEHG(income) : 0;
   const resaleProximity = (nearParents && firstTimer) ? DATA.proximityGrant : 0;
-  const resaleGrants = resaleEHG + resaleProximity; // no SHG for resale
+  const resaleCHG = (firstTimer && income <= 16000) ? getCHG(flatType, townKey) : 0;
+  const resaleGrants = resaleEHG + resaleCHG + resaleProximity; // EHG + CPF Housing Grant + PHG
   const resaleNetPrice = resalePrice - resaleGrants;
   const resaleReno = DATA.resaleReno[flatType];
   const resaleLegal = DATA.legalFees.resale;
@@ -325,7 +341,7 @@ function calculate() {
         <h3>🏆 Resale — Recommended for you</h3>
         <div class="detail-row"><span class="label">Why resale?</span><span class="value">BTO requires income ≤ S$${BTO_MAX_INCOME.toLocaleString()}/month. You exceed this ceiling, so BTO applications are not allowed.</span></div>
         <div class="detail-row"><span class="label">Buy a ${flatType}-Room resale</span><span class="value">${fmt(resalePrice)} • ${townKey === 'mature' ? 'Mature' : 'Non-Mature'} Estate</span></div>
-        <div class="detail-row"><span class="label">Grants (EHG${resaleProximity > 0 ? ' + PHG' : ''})</span><span class="value" style="color:var(--green)">-${fmt(resaleGrants)}</span></div>
+        <div class="detail-row"><span class="label">Grants (EHG${resaleCHG > 0 ? ' + CHG' : ''}${resaleProximity > 0 ? ' + PHG' : ''})</span><span class="value" style="color:var(--green)">-${fmt(resaleGrants)}</span></div>
         <div class="detail-row"><span class="label">Move-in Timing</span><span class="value" style="color:var(--green)">Immediate</span></div>
         <div class="detail-row" style="border-top:2px solid var(--primary);margin-top:8px;padding-top:10px"><span class="label" style="font-weight:700">Est. Total Cost</span><span class="value" style="font-weight:800;font-size:1.1rem">${fmt(resaleTotalCost)}</span></div>
       </div>

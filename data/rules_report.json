@@ -1,0 +1,56 @@
+{
+  "generated": "2026-09-28",
+  "queries": {
+    "bto_income_ceiling": "HDB BTO income ceiling 2026 families monthly household",
+    "ehg_max": "Enhanced CPF Housing Grant 2026 amount HDB first-timer",
+    "shg_max": "Special CPF Housing Grant HDB amount 2026 income ceiling",
+    "phg_max": "Proximity Housing Grant 2026 amount HDB",
+    "bsd_rate_max": "Buyer Stamp Duty BSD rate 2026 Singapore upper marginal",
+    "abds_extra_rate": "ABSD additional buyer stamp duty rate 2026 Singapore citizen first"
+  },
+  "changed": {
+    "bsd_rate_max": {
+      "old": 0.04,
+      "new": 0.06,
+      "evidence": "https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/buyer's-stamp-duty-(bsd)",
+      "note": "IRAS residential BSD bands on/after 15 Feb 2023: 1/2/3/4/5/6% at $180k/$360k/$1m/$1.5m/$3m. Tools previously encoded the pre-2023 1/2/3/4% bands (top $1m @3%, remaining @4%)."
+    },
+    "ehg_max": {
+      "old": 80000,
+      "new": 120000,
+      "evidence": "https://www.cpf.gov.sg/member/infohub/educational-resources/a-guide-to-enhanced-cpf-housing-and-proximity-grant",
+      "note": "CPF: EHG up to $120,000 for couples/families (two first-timer applicants); up to $60,000 for singles. Tool tier table previously stopped at $80,000 for the lowest income band."
+    },
+    "shg_max": {
+      "old": 40000,
+      "new": 0,
+      "evidence": "https://www.hdb.gov.sg/residential/buying-a-flat/understanding-your-eligibility-and-housing-loan-options/flat-and-grant-eligibility/couples-and-families/cpf-housing-grants-for-resale-flats-families",
+      "note": "Special CPF Housing Grant (SHG) discontinued; replaced by the CPF Housing Grant (CHG) — up to $80,000 for 2-4 room / $50,000 for 5-room+ resale flats, income ceiling now $16,000."
+    },
+    "phg_max": {
+      "old": 30000,
+      "new": 30000,
+      "evidence": "https://www.cpf.gov.sg/member/infohub/educational-resources/a-guide-to-enhanced-cpf-housing-and-proximity-grant",
+      "note": "Unchanged top amount ($30,000 live-with / $20,000 within 4km). Tool already correct; only label clarified."
+    },
+    "bto_income_ceiling": {
+      "old": 16000,
+      "new": 16000,
+      "evidence": "https://www.businesstimes.com.sg/singapore/ndr-2026-bto-income-ceiling-go-s16000-executive-condos-ceiling-s18000",
+      "note": "Unchanged vs baseline (NDR 2026 raise to $16,000 family / $8,000 singles eff. 24 Aug 2026 already reflected)."
+    },
+    "abds_extra_rate": {
+      "old": 0.0,
+      "new": 0.0,
+      "evidence": "https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/buyer's-stamp-duty-(bsd)",
+      "note": "No change. SC first property remains 0% ABSD; index.html ABSD table (sc2 20%, sc3+ 30%, PR1 5%, PR2 30%, PR3+ 35%, foreigner 60%, entity 65%) confirmed current."
+    }
+  },
+  "fixed_in_tools": [
+    "index.html: bsd() bands + BSD_BANDS corrected to on/after 15 Feb 2023 (3% band extended to $1m, new $1.5m/4% and $3m/5% bands, top 6%).",
+    "bto-vs-resale/index.html: ehg[] tier table corrected to $120k max / $9,000 ceiling.",
+    "bto-vs-resale/index.html: BSD bands corrected (top 6%).",
+    "bto-vs-resale/index.html: SHG removed; CPF Housing Grant (CHG, resale-only, $80k/$50k, $16k ceiling) added to resale grant stack."
+  ],
+  "note": "Verification performed by the agent wrapper against IRAS / CPF / HDB / news. Baseline updated to confirmed figures."
+}
