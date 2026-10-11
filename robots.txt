@@ -1,8 +1,8 @@
-# property.angie-ceo.com robots.txt
+# propertywilson.com robots.txt
 User-agent: *
 Allow: /
 
-Sitemap: https://property.angie-ceo.com/sitemap.xml
+Sitemap: https://propertywilson.com/sitemap.xml
 
 # EU Content Signals
 search: yes
