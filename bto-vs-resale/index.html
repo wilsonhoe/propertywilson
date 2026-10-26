@@ -37,7 +37,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent)}
 .btn-full{width:100%}
 .results{display:none}
 .result-card{border:2px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;position:relative}
-.result-card.winner{border-color:var(--green);background:linear-gradient(135deg,#ecfdf5,#d1fae5)}
+.result-card.winner{border-color:var(--green);background:rgba(16,185,129,.12)}
 .result-card h3{font-size:1.1rem;margin-bottom:12px}
 .result-card .big-number{font-size:2rem;font-weight:800;margin:8px 0}
 .result-card .big-number.green{color:var(--green)}
@@ -55,8 +55,8 @@ input:focus,select:focus{outline:none;border-color:var(--accent)}
 .comparison-table th{background:var(--primary);color:#fff;font-weight:600}
 .comparison-table th:first-child{border-radius:8px 0 0 0}
 .comparison-table th:last-child{border-radius:0 8px 0 0}
-.comparison-table tr:hover{background:#f0f9ff}
-.comparison-table .highlight{background:#ecfdf5;font-weight:600}
+.comparison-table tr:hover{background:rgba(99,102,241,.08)}
+.comparison-table .highlight{background:rgba(16,185,129,.12);font-weight:600}
 .cta-section{text-align:center;padding:30px 0;background:linear-gradient(135deg,#1a3a5c,#2d5a88);border-radius:var(--radius);color:#fff;margin:30px 0}
 .cta-section h3{font-size:1.3rem;margin-bottom:8px}
 .cta-section p{opacity:.85;margin-bottom:16px;font-size:.95rem}
@@ -79,7 +79,7 @@ footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.8rem}
 <header>
   <h1>BTO vs Resale — Which Makes You Better Off?</h1>
   <p class="subtitle">Free Singapore financial comparison — see your real total cost, grants &amp; 5-year outcome</p>
-  <div class="urgency">⏰ HFE deadline: 15 Sep 2026 — 16 days left. Don't commit blind.</div>
+  <div class="urgency">Get your HDB Flat Eligibility (HFE) letter before you commit: it confirms your eligibility, grants and loan.</div>
 </header>
 
 <section id="input-section">
@@ -101,7 +101,7 @@ footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.8rem}
       <option value="9000">$8,001 – $9,000</option>
       <option value="10000" selected>$9,001 – $10,000</option>
       <option value="11000">$10,001 – $11,000</option>
-      <option value="12000">$10,001 – $12,000</option>
+      <option value="12000">$11,001 – $12,000</option>
       <option value="14000">$12,001 – $14,000</option>
       <option value="16000">$14,001 – $16,000</option>
       <option value="16001">Above $16,000</option>
@@ -117,9 +117,10 @@ footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.8rem}
     </select>
   </div>
   <div>
-    <label>Living Near Parents? <span class="hint">(Proximity Housing Grant: stay within 4km)</span></label>
+    <label>Living With or Near Parents? <span class="hint">(Proximity Housing Grant, resale flats only)</span></label>
     <select id="nearParents">
-      <option value="yes">Yes — within 4km</option>
+      <option value="with">Living with parents/child</option>
+      <option value="near">Within 4 km of parents/child</option>
       <option value="no" selected>No</option>
     </select>
   </div>
@@ -133,7 +134,7 @@ footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.8rem}
     </select>
   </div>
   <div>
-    <label>Planned Stay Duration <span class="hint">(5-year MOP applies to both BTO &amp; resale)</span></label>
+    <label>Planned Stay Duration <span class="hint">(MOP: 5 years for Standard flats, 10 years for Plus and Prime)</span></label>
     <select id="stayDuration">
       <option value="5">5 years (MOP minimum)</option>
       <option value="10" selected>10 years</option>
@@ -172,7 +173,8 @@ footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.8rem}
 <footer>
   <p>Built by <strong>Wilson Yeu</strong> · PropNex Associate Advisor · CEA R073422I</p>
   <p><a href="https://propertywilson.com" style="color:var(--primary);text-decoration:none;font-weight:600">propertywilson.com</a> · <a href="https://angie-ceo.com" style="color:var(--muted);text-decoration:none">angie-ceo.com</a></p>
-  <p style="margin-top:8px">Data sources: HDB, MND, URA, MAS. Last updated: Aug 2026.</p>
+  <p style="margin-top:8px">Grant rules, income ceilings, MOP and stamp duty checked against HDB, IRAS and MAS on 26 Oct 2026. Flat prices, renovation costs, EHG income tiers and appreciation are estimates for illustration; your HFE letter states your exact grants.</p>
+  <p style="margin-top:8px"><a href="/hdb-grants/" style="color:var(--primary);text-decoration:none;font-weight:600">HDB grants explained: what you can get for BTO vs resale →</a></p>
 </footer>
 
 </div>
@@ -212,7 +214,7 @@ const DATA = {
   chg: 80000, // CPF Housing Grant (resale, first-timer families, 2-4 room; 5-room = 50000). Income ceiling S$16,000.
   // NOTE: the old 'Special CPF Housing Grant' (SHG) was discontinued — replaced by the CPF Housing Grant above.
   shg: 0, // discontinued
-  proximityGrant: 30000, // PHG — $30K living with parents/child, $20K within 4km (max $30K used here)
+  proximityGrant: { with: 30000, near: 20000 }, // PHG (families), resale only: $30K living with, $20K within 4 km. No income ceiling. (HDB, checked 26 Oct 2026)
   btoReno: { 3: 35000, 4: 45000, 5: 55000 }, // renovation cost
   resaleReno: { 3: 15000, 4: 20000, 5: 25000 }, // resale flats usually already renovated
   // Buyer's Stamp Duty (BSD), residential, on/after 15 Feb 2023 (IRAS)
@@ -266,6 +268,7 @@ function calcStampDuty(price) {
 }
 
 function fmt(n) {
+  n = Math.round(n); // whole dollars only
   if (n < 0) return '-$' + Math.abs(n).toLocaleString('en-SG');
   return '$' + n.toLocaleString('en-SG');
 }
@@ -274,12 +277,12 @@ function calculate() {
   const flatType = parseInt(document.getElementById('flatType').value);
   const income = parseInt(document.getElementById('income').value);
   const firstTimer = document.getElementById('firstTimer').value === 'yes';
-  const nearParents = document.getElementById('nearParents').value === 'yes';
+  const parentsOpt = document.getElementById('nearParents').value; // 'with' | 'near' | 'no'
   const town = document.getElementById('town').value;
   const stayYears = parseInt(document.getElementById('stayDuration').value);
 
   // === BTO ELIGIBILITY: household income ceiling ===
-  // Current rule: BTO income ceiling = S$16,000/month for families (NDR 2026, eff. Aug 24 2026).
+  // BTO income ceiling for families: S$16,000/month for 4- and 5-room (3-room: S$16,000 or S$8,000 by project). HDB eligibility page, checked 26 Oct 2026.
   const BTO_MAX_INCOME = 16000;
   const btoIncomeOverCeiling = income > BTO_MAX_INCOME;
 
@@ -288,13 +291,12 @@ function calculate() {
   // === BTO CALCULATION ===
   const btoPrice = DATA.bto[flatType][townKey].price;
   const ehg = firstTimer ? getEHG(income) : 0;
-  const proximityGrant = (nearParents && firstTimer) ? DATA.proximityGrant : 0;
-  const btoGrants = ehg + proximityGrant; // BTO: only EHG + PHG apply (CHG is resale-only)
+  const btoGrants = ehg; // New flats: only the EHG applies (CPF Housing Grant and PHG are resale-only)
   const resaleLevy = firstTimer ? 0 : DATA.resaleLevy[flatType];
   const btoNetPrice = btoPrice - btoGrants + resaleLevy;
   const btoReno = DATA.btoReno[flatType];
   const btoLegal = DATA.legalFees.bto;
-  const btoStampDuty = calcStampDuty(btoNetPrice); // BTO also has BSD
+  const btoStampDuty = calcStampDuty(btoPrice); // BSD is on the purchase price, not the price net of grants
   const btoWaitMonths = DATA.waitTime[townKey];
   const btoRentCost = btoWaitMonths * DATA.rentalSavings; // opportunity cost of waiting
   const btoTotalCost = btoNetPrice + btoReno + btoLegal + btoStampDuty + btoRentCost;
@@ -305,15 +307,15 @@ function calculate() {
 
   // === RESALE CALCULATION ===
   const resalePrice = DATA.resale[flatType][townKey].price;
-  const resaleEHG = firstTimer ? getEHG(income) : 0;
-  const resaleProximity = (nearParents && firstTimer) ? DATA.proximityGrant : 0;
   const resaleCHG = (firstTimer && income <= 16000) ? getCHG(flatType, townKey) : 0;
+  const resaleEHG = resaleCHG > 0 ? getEHG(income) : 0; // resale buyers must qualify for the CPF Housing Grant first
+  const resaleProximity = DATA.proximityGrant[parentsOpt] || 0; // PHG: no income ceiling, not limited to first-timers
   const resaleGrants = resaleEHG + resaleCHG + resaleProximity; // EHG + CPF Housing Grant + PHG
   const resaleNetPrice = resalePrice - resaleGrants;
   const resaleReno = DATA.resaleReno[flatType];
   const resaleLegal = DATA.legalFees.resale;
   const resaleValuation = DATA.valuationFee.resale;
-  const resaleStampDuty = calcStampDuty(resaleNetPrice);
+  const resaleStampDuty = calcStampDuty(resalePrice);
   const resaleTotalCost = resaleNetPrice + resaleReno + resaleLegal + resaleValuation + resaleStampDuty;
 
   // Resale future value (already existing flat, slower appreciation)
@@ -334,18 +336,18 @@ function calculate() {
     verdict.innerHTML = `
       <h3>🚫 BTO is not available to you</h3>
       <div class="amount">Income above the S$16,000 ceiling</div>
-      <p>Your combined monthly household income exceeds the current <strong>BTO income ceiling of S$${BTO_MAX_INCOME.toLocaleString()}/month</strong>. You are <strong>not eligible to apply for a new BTO flat</strong>. Resale is the recommended path — you can buy immediately and still receive CPF housing grants (subject to the higher resale grant income ceiling).</p>
+      <p>Your combined monthly household income exceeds the current <strong>BTO income ceiling of S$${BTO_MAX_INCOME.toLocaleString()}/month</strong>. You are <strong>not eligible to apply for a new BTO flat</strong>. Resale is the path open to you. Resale flats have no income ceiling, but the CPF Housing Grant and EHG do (S$16,000 and S$9,000 a month for families), so above S$16,000 only the Proximity Housing Grant can apply.</p>
     `;
     cards.innerHTML = `
       <div class="result-card winner">
         <h3>🏆 Resale — Recommended for you</h3>
         <div class="detail-row"><span class="label">Why resale?</span><span class="value">BTO requires income ≤ S$${BTO_MAX_INCOME.toLocaleString()}/month. You exceed this ceiling, so BTO applications are not allowed.</span></div>
         <div class="detail-row"><span class="label">Buy a ${flatType}-Room resale</span><span class="value">${fmt(resalePrice)} • ${townKey === 'mature' ? 'Mature' : 'Non-Mature'} Estate</span></div>
-        <div class="detail-row"><span class="label">Grants (EHG${resaleCHG > 0 ? ' + CHG' : ''}${resaleProximity > 0 ? ' + PHG' : ''})</span><span class="value" style="color:var(--green)">-${fmt(resaleGrants)}</span></div>
+        <div class="detail-row"><span class="label">Grants (${[resaleEHG > 0 ? 'EHG' : '', resaleCHG > 0 ? 'CPF Housing Grant' : '', resaleProximity > 0 ? 'PHG' : ''].filter(Boolean).join(' + ') || 'none'})</span><span class="value" style="color:var(--green)">${resaleGrants > 0 ? '-' : ''}${fmt(resaleGrants)}</span></div>
         <div class="detail-row"><span class="label">Move-in Timing</span><span class="value" style="color:var(--green)">Immediate</span></div>
         <div class="detail-row" style="border-top:2px solid var(--primary);margin-top:8px;padding-top:10px"><span class="label" style="font-weight:700">Est. Total Cost</span><span class="value" style="font-weight:800;font-size:1.1rem">${fmt(resaleTotalCost)}</span></div>
       </div>
-      <p style="text-align:center;margin-top:8px;color:var(--muted);font-size:.85rem">Note: You may still qualify for the CPF Housing Grant on a resale flat if your income is within the higher resale grant ceiling.</p>
+      <p style="text-align:center;margin-top:8px;color:var(--muted);font-size:.85rem">The Proximity Housing Grant has no income ceiling: up to S$30,000 if you live with your parents or child, S$20,000 within 4 km. <a href="/hdb-grants/" style="color:var(--primary)">See how HDB grants work</a>.</p>
     `;
     tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--muted);padding:14px">BTO comparison omitted — household income exceeds the S$16,000 BTO income ceiling.</td></tr>';
     document.getElementById('results-section').style.display = 'block';
@@ -373,7 +375,7 @@ function calculate() {
     <div class="result-card ${btoBetter ? 'winner' : ''}">
       <h3>${btoBetter ? '🏆 ' : ''}BTO ${flatType}-Room (${townKey === 'mature' ? 'Mature' : 'Non-Mature'} Estate)</h3>
       <div class="detail-row"><span class="label">Purchase Price</span><span class="value">${fmt(btoPrice)}</span></div>
-      <div class="detail-row"><span class="label">Grants (EHG${shg > 0 ? ' + SHG' : ''}${proximityGrant > 0 ? ' + PHG' : ''})</span><span class="value" style="color:var(--green)">-${fmt(btoGrants)}</span></div>
+      <div class="detail-row"><span class="label">Grants (EHG)</span><span class="value" style="color:var(--green)">${btoGrants > 0 ? '-' : ''}${fmt(btoGrants)}</span></div>
       ${!firstTimer ? `<div class="detail-row"><span class="label">Resale Levy</span><span class="value" style="color:var(--red)">+${fmt(resaleLevy)}</span></div>` : ''}
       <div class="detail-row"><span class="label">Net Price</span><span class="value">${fmt(btoNetPrice)}</span></div>
       <div class="detail-row"><span class="label">Renovation</span><span class="value">${fmt(btoReno)}</span></div>
@@ -386,7 +388,7 @@ function calculate() {
     <div class="result-card ${!btoBetter ? 'winner' : ''}">
       <h3>${!btoBetter ? '🏆 ' : ''}Resale ${flatType}-Room (${townKey === 'mature' ? 'Mature' : 'Non-Mature'} Estate)</h3>
       <div class="detail-row"><span class="label">Purchase Price</span><span class="value">${fmt(resalePrice)}</span></div>
-      <div class="detail-row"><span class="label">Grants (EHG${resaleProximity > 0 ? ' + PHG' : ''})</span><span class="value" style="color:var(--green)">-${fmt(resaleGrants)}</span></div>
+      <div class="detail-row"><span class="label">Grants (${[resaleEHG > 0 ? 'EHG' : '', resaleCHG > 0 ? 'CPF Housing Grant' : '', resaleProximity > 0 ? 'PHG' : ''].filter(Boolean).join(' + ') || 'none'})</span><span class="value" style="color:var(--green)">${resaleGrants > 0 ? '-' : ''}${fmt(resaleGrants)}</span></div>
       <div class="detail-row"><span class="label">Net Price</span><span class="value">${fmt(resaleNetPrice)}</span></div>
       <div class="detail-row"><span class="label">Renovation</span><span class="value">${fmt(resaleReno)}</span></div>
       <div class="detail-row"><span class="label">Legal + Valuation + Stamp Duty</span><span class="value">${fmt(resaleLegal + resaleValuation + resaleStampDuty)}</span></div>
@@ -409,7 +411,7 @@ function calculate() {
     [`${stayYears}-Year Projected Value`, fmt(Math.round(btoFutureValue)), fmt(Math.round(resaleFutureValue))],
     ['Net Outcome', fmt(Math.round(btoNetOutcome)), fmt(Math.round(resaleNetOutcome))],
     ['Time to Keys', `${btoWaitMonths} months`, 'Immediate'],
-    ['MOP', '5 years', '5 years'],
+    ['MOP', '5 yrs (Standard) / 10 yrs (Plus, Prime)', '5 yrs (Standard) / 10 yrs (Plus, Prime)'],
   ];
 
   tbody.innerHTML = rows.map((r, i) => {
