@@ -62,7 +62,8 @@
         "url": "https://www.propnex.com"
       },
       "sameAs": [
-        "https://propertywilson.com"
+        "https://propertywilson.com",
+        "https://open.spotify.com/show/57NpRtaTJ4u1lc2GTrUx9i"
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
@@ -123,7 +124,8 @@
       "areaServed": { "@type": "Country", "name": "Singapore" },
       "knowsAbout": ["HDB flats", "Condominiums", "Property investment", "Rental", "Singapore real estate", "HDB resale", "Executive Condominium", "Private property", "PropNex"],
       "sameAs": [
-        "https://propertywilson.com"
+        "https://propertywilson.com",
+        "https://open.spotify.com/show/57NpRtaTJ4u1lc2GTrUx9i"
       ]
     }
     </script>
@@ -467,6 +469,15 @@
 
         /* ===================== SECTION HEADERS ===================== */
         .section { max-width: 1280px; margin: 0 auto; padding: 80px 32px; }
+        .podcast-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; margin-top: 32px; align-items: start; }
+        .podcast-info { padding: 24px; }
+        .podcast-info h3 { font-size: 20px; margin-bottom: 10px; }
+        .podcast-info p { color: var(--text-secondary); font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+        .podcast-info ul { color: var(--text-secondary); font-size: 15px; line-height: 1.7; margin: 0 0 16px 20px; }
+        .podcast-info p.podcast-note { font-size: 13px; color: var(--text-tertiary); }
+        .podcast-embed { padding: 12px; }
+        .podcast-embed iframe { display: block; width: 100%; height: 352px; border: 0; border-radius: 12px; }
+        @media (max-width: 860px) { .podcast-grid { grid-template-columns: 1fr; } }
         .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-indigo); font-weight: 600; margin-bottom: 8px; font-family: var(--font-mono); }
         .section-title { font-size: 36px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em; }
         .section-desc { font-size: 16px; color: var(--text-secondary); max-width: 640px; line-height: 1.7; }
@@ -546,6 +557,7 @@
         <a href="#services">Services</a>
         <a href="#zones">Areas</a>
         <a href="#why">Why Me</a>
+        <a href="#podcast">Podcast</a>
         <a href="https://angie-ceo.com" style="color:var(--text-tertiary)">Notion Tools ↗</a>
         <a href="https://propertywilson.com/bto-vs-resale/" style="color:var(--text-tertiary)">BTO vs Resale ↗</a>
         <a href="/hdb-grants/" style="color:var(--text-tertiary)">HDB Grants</a>
@@ -968,6 +980,29 @@
     </div>
 </section>
 
+<!-- PODCAST -->
+<section class="section" id="podcast">
+    <div class="section-label fade-up">Podcast</div>
+    <div class="section-title fade-up">SG Property Agent Brief</div>
+    <div class="section-desc fade-up">Singapore property news explained for property agents: what changed, what it means for buyers and sellers, and practical client talking points.</div>
+    <div class="podcast-grid fade-up d2">
+        <div class="node-card podcast-info">
+            <h3>What each episode covers</h3>
+            <ul>
+                <li>HDB, private housing and industry updates</li>
+                <li>What changed, and what it means for buyers and sellers</li>
+                <li>Practical talking points to use with clients</li>
+            </ul>
+            <p>Two AI-generated hosts discuss the news. Created by Wilson Yeu.</p>
+            <p class="podcast-note">General news commentary, not personalised financial or legal advice.</p>
+            <a href="https://open.spotify.com/show/57NpRtaTJ4u1lc2GTrUx9i" class="btn-secondary" target="_blank" rel="noopener">🎧 Listen on Spotify ↗</a>
+        </div>
+        <div class="node-card podcast-embed">
+            <iframe src="https://open.spotify.com/embed/show/57NpRtaTJ4u1lc2GTrUx9i" title="SG Property Agent Brief podcast on Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="contact">
     <div class="cta-inner fade-up">
@@ -995,6 +1030,7 @@
     </div>
     <div class="footer-links">
         <a href="/hdb-grants/">HDB Grants Guide</a>
+        <a href="https://open.spotify.com/show/57NpRtaTJ4u1lc2GTrUx9i" target="_blank" rel="noopener">Podcast ↗</a>
         <a href="https://angie-ceo.com">Notion Templates ↗</a>
         <a href="https://wa.me/6591448211">WhatsApp</a>
         <a href="mailto:wilson.yeu@gmail.com">Email</a>
